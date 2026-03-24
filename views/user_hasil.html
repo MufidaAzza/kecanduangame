@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hasil | ADDICTICA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+
+<body class="bg-slate-50 text-slate-700 font-['Plus_Jakarta_Sans'] min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-[#0b3c6d] text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h1 class="text-lg font-semibold tracking-wide">Hasil Klasifikasi</h1>
+        <p class="text-xs text-white/70">Klasifikasi Kecanduan Game Online</p>
+      </div>
+      <a href="/logout"
+         class="inline-flex items-center justify-center rounded-full bg-white/95 px-5 py-2 text-xs font-semibold text-[#0b3c6d] hover:bg-white transition">
+        Logout
+      </a>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-6 py-8 lg:flex lg:gap-8">
+    <!-- Sidebar -->
+    <aside class="lg:w-72">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="text-center">
+          <img id="fotoUser"
+               class="w-20 h-20 mx-auto rounded-full object-cover shadow border-4 border-[#0b3c6d]"
+               src="/uploads/default.png">
+
+          <h2 id="namaUser" class="mt-4 font-semibold text-slate-900"></h2>
+          <p id="emailUser" class="text-xs text-slate-500"></p>
+        </div>
+
+        <nav class="mt-8 space-y-2">
+          <a href="/dashboard"
+             class="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 transition">
+            Dashboard
+          </a>
+          <a href="/profil"
+             class="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 transition">
+            Profil
+          </a>
+          <a href="/user_konsultasi"
+             class="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 transition">
+            Konsultasi
+          </a>
+          <a href="/user_hasil"
+             class="flex items-center justify-between rounded-xl bg-[#0b3c6d] px-4 py-3 text-sm font-semibold text-white shadow">
+            Hasil
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 mt-6 lg:mt-0 space-y-6">
+      <section class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Ringkasan Hasil</p>
+            <h2 class="mt-2 text-2xl font-['Sora'] font-semibold text-slate-900">
+              Ringkasan Hasil Klasifikasi
+            </h2>
+            <p class="mt-1 text-sm text-slate-600">
+              Hasil analisis berdasarkan kuesioner dan metode Fuzzy Tsukamoto.
+            </p>
+          </div>
+          <span id="hasilBadge"
+                class="inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-xs font-semibold text-emerald-700">
+            Stabil
+          </span>
+        </div>
+
+        <div class="mt-6 grid gap-6 lg:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <p class="text-xs font-semibold text-slate-500">Kategori</p>
+            <div class="mt-4 flex items-center gap-4">
+              <div id="hasilIcon" class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+                <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2">
+                  <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <div>
+                <p id="hasilUser" class="text-2xl font-semibold text-slate-900">-</p>
+                <p class="text-xs text-slate-500">Tingkat kecanduan game</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <p class="text-xs font-semibold text-slate-500">Nilai Akhir (Z)</p>
+            <p id="nilaiZUser" class="mt-3 text-2xl font-semibold text-slate-900">-</p>
+            <div class="mt-4 h-2 w-full rounded-full bg-slate-100">
+              <div id="hasilProgress" class="h-2 rounded-full bg-emerald-400" style="width: 35%"></div>
+            </div>
+            <p id="hasilProgressLabel" class="mt-2 text-xs text-slate-500">Skala 0 - 100</p>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <p class="text-xs font-semibold text-slate-500">Penjelasan</p>
+            <p id="keteranganUser" class="mt-3 text-sm text-slate-600 leading-relaxed">
+              Silakan lakukan konsultasi terlebih dahulu untuk melihat ringkasan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h3 class="text-lg font-['Sora'] font-semibold text-slate-900 mb-2">
+          Faktor yang Mempengaruhi Hasil
+        </h3>
+        <p class="text-sm text-slate-600 mb-6">
+          Faktor berikut dinilai dari jawaban kuesioner dan memengaruhi hasil klasifikasi.
+        </p>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p class="text-sm font-semibold text-slate-800">Durasi Bermain</p>
+            <p class="text-xs text-slate-500 mt-1">Seberapa lama waktu yang digunakan untuk bermain game.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p class="text-sm font-semibold text-slate-800">Kontrol Diri</p>
+            <p class="text-xs text-slate-500 mt-1">Kemampuan mengendalikan keinginan bermain.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p class="text-sm font-semibold text-slate-800">Gangguan Aktivitas</p>
+            <p class="text-xs text-slate-500 mt-1">Pengaruh game terhadap belajar, tugas, dan tanggung jawab.</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p class="text-sm font-semibold text-slate-800">Kualitas Istirahat</p>
+            <p class="text-xs text-slate-500 mt-1">Dampak bermain game pada pola tidur dan kesehatan.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h3 class="text-lg font-['Sora'] font-semibold text-slate-900 mb-2">
+          Edukasi dan Pencegahan
+        </h3>
+        <p class="text-sm text-slate-600 mb-6">
+          Langkah sederhana untuk mencegah kecanduan game dan menjaga keseimbangan aktivitas.
+        </p>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+            <p class="text-sm font-semibold text-emerald-800">Atur Jadwal Bermain</p>
+            <p class="text-xs text-emerald-700 mt-1">Tentukan durasi bermain harian yang jelas.</p>
+          </div>
+          <div class="rounded-xl border border-blue-200 bg-blue-50 p-4">
+            <p class="text-sm font-semibold text-blue-800">Utamakan Belajar</p>
+            <p class="text-xs text-blue-700 mt-1">Selesaikan tugas penting sebelum bermain.</p>
+          </div>
+          <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p class="text-sm font-semibold text-amber-800">Batasi Sebelum Tidur</p>
+            <p class="text-xs text-amber-700 mt-1">Hindari bermain game 1 jam sebelum tidur.</p>
+          </div>
+          <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
+            <p class="text-sm font-semibold text-rose-800">Aktivitas Alternatif</p>
+            <p class="text-xs text-rose-700 mt-1">Olahraga, membaca, atau kegiatan sosial.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Script Ambil Data -->
+  <script>
+  fetch("/api/user")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("namaUser").innerText = data.nama || "-";
+      document.getElementById("emailUser").innerText = data.email || "-";
+
+      if (data.foto) {
+        document.getElementById("fotoUser").src = "/uploads/" + data.foto;
+      }
+    })
+    .catch(() => {
+      console.log("Gagal mengambil data user");
+    });
+
+  fetch("/api/hasil")
+    .then(res => {
+      if (!res.ok) throw new Error("Unauthorized");
+      return res.json();
+    })
+    .then(data => {
+      const terbaru = Array.isArray(data) && data.length > 0 ? data[0] : null;
+
+      if (!terbaru || !terbaru.hasil) {
+        document.getElementById("hasilUser").innerText = "Belum ada hasil";
+        document.getElementById("hasilUser").classList.add("text-slate-500");
+        document.getElementById("nilaiZUser").innerText = "-";
+        document.getElementById("keteranganUser").innerText =
+          "Silakan lakukan konsultasi terlebih dahulu.";
+        return;
+      }
+
+      const level = terbaru.hasil;
+      const nilaiZ = typeof terbaru.nilaiZ === "number" ? terbaru.nilaiZ : null;
+      const score = nilaiZ !== null ? Math.max(0, Math.min(100, nilaiZ)) : (level === "Tinggi" ? 85 : level === "Sedang" ? 60 : 35);
+
+      const themes = {
+        Rendah: {
+          badge: "bg-emerald-100 text-emerald-700",
+          icon: "bg-emerald-100 text-emerald-700",
+          progress: "bg-emerald-400",
+          label: "Stabil"
+        },
+        Sedang: {
+          badge: "bg-amber-100 text-amber-700",
+          icon: "bg-amber-100 text-amber-700",
+          progress: "bg-amber-400",
+          label: "Perlu Diperhatikan"
+        },
+        Tinggi: {
+          badge: "bg-rose-100 text-rose-700",
+          icon: "bg-rose-100 text-rose-700",
+          progress: "bg-rose-500",
+          label: "Perlu Tindakan"
+        }
+      };
+
+      const theme = themes[level] || themes.Rendah;
+
+      document.getElementById("hasilUser").innerText = level;
+      document.getElementById("nilaiZUser").innerText = nilaiZ !== null ? nilaiZ : "-";
+      document.getElementById("hasilProgress").style.width = `${score}%`;
+      document.getElementById("hasilProgress").className = `h-2 rounded-full ${theme.progress}`;
+      document.getElementById("hasilBadge").className = `inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold ${theme.badge}`;
+      document.getElementById("hasilBadge").innerText = theme.label;
+      document.getElementById("hasilProgressLabel").innerText = `Skala 0 - 100 · ${score}%`;
+      const hasilIcon = document.getElementById("hasilIcon");
+      hasilIcon.className = `flex h-12 w-12 items-center justify-center rounded-2xl ${theme.icon}`;
+      hasilIcon.innerHTML = level === "Tinggi"
+        ? `<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M4.93 4.93l14.14 14.14" stroke-linecap="round" stroke-linejoin="round"></path></svg>`
+        : level === "Sedang"
+          ? `<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.29 3.86l-7 12A2 2 0 005.04 19h13.92a2 2 0 001.75-3.14l-7-12a2 2 0 00-3.46 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>`
+          : `<svg viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
+
+      document.getElementById("keteranganUser").innerText =
+        "Berdasarkan hasil perhitungan metode Fuzzy Tsukamoto, tingkat kecanduan game online Anda berada pada kategori " +
+        level +
+        ". Disarankan untuk mengatur waktu bermain dan meningkatkan aktivitas produktif.";
+    })
+    .catch(() => {
+      document.getElementById("hasilUser").innerText = "Belum ada hasil";
+      document.getElementById("hasilUser").classList.add("text-slate-500");
+      document.getElementById("nilaiZUser").innerText = "-";
+      document.getElementById("keteranganUser").innerText =
+        "Silakan lakukan konsultasi terlebih dahulu.";
+    });
+  </script>
+
+</body>
+</html>
+
+
